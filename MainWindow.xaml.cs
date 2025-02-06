@@ -279,7 +279,7 @@ namespace AssetInserter
         {
             using (MagickImage image = new MagickImage(inputPath))
             {
-                image.Quality = 100;
+                image.Quality = 90;
                 image.Write(outputPath, MagickFormat.WebP);
             }
         }
