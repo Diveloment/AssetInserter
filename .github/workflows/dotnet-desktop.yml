@@ -24,7 +24,7 @@ jobs:
 
     - name: Install .NET Framework 4.8 SDK
       run: |
-        choco install visualstudio2019-build-tools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop"
+        choco install visualstudio2019-build-tools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop" --yes
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
