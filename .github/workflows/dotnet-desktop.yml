@@ -22,9 +22,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install Visual Studio 2019 Build Tools
+    - name: Install Visual Studio 2022 Build Tools
       run: |
-        choco install visualstudio2019-build-tools --version 16.11.2 --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop" --yes
+        choco install visualstudio2022-build-tools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop" --yes
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
