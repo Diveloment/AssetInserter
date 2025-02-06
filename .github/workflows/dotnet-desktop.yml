@@ -22,8 +22,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install Visual Studio 2022 Build Tools
+    - name: Add chocolatey.org as a source
       run: |
+        choco source add -n=chocolatey https://community.chocolatey.org/api/v2/
         choco install visualstudio2022-build-tools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop" --yes
 
     - name: Setup MSBuild
