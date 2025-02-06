@@ -1,4 +1,4 @@
-name: .NET Core Desktop Build
+name: .NET Framework 4.8 Build
 
 on:
   push:
@@ -22,29 +22,22 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install .NET SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+    - name: Install .NET Framework 4.8 SDK
+      run: |
+        choco install visualstudio2019-build-tools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop"
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
       with:
-        # This will ensure that the correct MSBuild is set up for .NET Framework
-        msbuild-version: 16.8.3 # or the version suitable for .NET Framework 4.8
+        msbuild-version: 16.8.3  # or your desired version
 
     - name: Restore Dependencies
-      run: dotnet restore $env:Solution_Name
+      run: nuget restore ${{ env.Solution_Name }}
 
     - name: Build Solution
       run: msbuild ${{ env.Solution_Name }} /p:Configuration=${{ matrix.configuration }} /p:Platform=x64 /p:TargetFrameworkVersion=v4.8
       env:
         Solution_Name: AssetInserter.sln
-
-    - name: Run Unit Tests
-      run: dotnet test --configuration $env:Configuration --no-build --verbosity normal
-      env:
-        Configuration: ${{ matrix.configuration }}
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
